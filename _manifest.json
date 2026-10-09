@@ -1,0 +1,43 @@
+{
+  "manifest_version": 2,
+  "id": "github.sodacodesave.birthday-plugin",
+  "version": "1.0.0",
+  "name": "生日快乐，麦麦",
+  "description": "在配置的生日当天向回复提示词注入「今天是你的生日」提醒",
+  "author": {
+    "name": "Soda",
+    "url": "https://github.com/SodaCodeSave"
+  },
+  "license": "MIT",
+  "urls": {
+    "repository": "https://github.com/SodaCodeSave/MaiBot-Birthday-Plugin",
+    "homepage": "https://github.com/SodaCodeSave/MaiBot-Birthday-Plugin",
+    "documentation": "https://github.com/SodaCodeSave/MaiBot-Birthday-Plugin/#readme",
+    "issues": "https://github.com/SodaCodeSave/MaiBot-Birthday-Plugin/issues"
+  },
+  "host_application": {
+    "min_version": "1.3.0",
+    "max_version": "999.999.999"
+  },
+  "sdk": {
+    "min_version": "2.0.0",
+    "max_version": "999.999.999"
+  },
+  "dependencies": [],
+  "plugin_type": "extension",
+  "display": {
+    "icon": {
+      "type": "lucide",
+      "value": "cake"
+    }
+  },
+  "capabilities": [
+    "send.text"
+  ],
+  "i18n": {
+    "default_locale": "zh-CN",
+    "supported_locales": [
+      "zh-CN"
+    ]
+  }
+}
