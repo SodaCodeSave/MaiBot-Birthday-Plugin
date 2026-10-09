@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "id": "github.sodacodesave.birthday-plugin",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": "生日快乐，麦麦",
   "description": "在配置的生日当天向回复提示词注入「今天是你的生日」提醒",
   "author": {
