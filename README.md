@@ -8,14 +8,16 @@
 
 ## 安装
 
-1. 将 `birthday_plugin` 整个目录放入 MaiBot 的 `plugins/` 目录下：
+1. 把本仓库根目录整个复制到 MaiBot 的 `plugins/` 目录下（克隆或直接复制均可）：
    ```
-   plugins/
-   └── birthday_plugin/
-       ├── _manifest.json
-       ├── plugin.py
-       └── README.md
+   <MaiBot根目录>/
+   └── plugins/
+       └── <本仓库根目录>/
+           ├── _manifest.json
+           ├── plugin.py
+           └── README.md
    ```
+   MaiBot 按 `_manifest.json` 识别插件，目录名任意、不影响加载；为便于对照文档，建议将目录命名为 `birthday_plugin`。
 2. 启动 MaiBot（`uv run bot.py`），插件会被自动发现并加载；首次加载会在插件目录下生成运行时配置 `config.toml`。
 
 ## 启用
