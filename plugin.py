@@ -172,7 +172,7 @@ class BirthdayPlugin(MaiBotPlugin):
 
     @Command("birthday", description="查看生日配置与今日注入状态", pattern=r"^/birthday$")
     async def handle_birthday(self, **kwargs: Any) -> Tuple[bool, str, int]:
-        """返回当前生日配置、今日是否注入以及注入内容预览。"""
+        """返回当前生日配置与今日是否注入，不外发模板内容。"""
 
         stream_id = str(kwargs.get("stream_id") or "")
         today = date.today()
@@ -191,7 +191,6 @@ class BirthdayPlugin(MaiBotPlugin):
             f"配置的生日：{birthday.month}月{birthday.day}日",
             f"启用状态：{'已启用' if self.config.plugin.enabled else '已停用'}",
             f"今天（{today.month}月{today.day}日）：{status}",
-            f"注入内容预览：{self._render_prompt() or '（提示词模板为空，不注入）'}",
         ]
         await self.ctx.send.text("\n".join(lines), stream_id)
         return True, "已返回生日配置状态", 2
