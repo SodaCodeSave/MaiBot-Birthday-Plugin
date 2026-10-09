@@ -4,6 +4,7 @@
 Hook 把提示词追加到 replyer 的额外回复要求中，让模型在生成回复时知道今天是自己的生日。
 """
 
+from calendar import monthrange
 from datetime import date
 from typing import Any, Dict, Tuple
 
@@ -60,6 +61,7 @@ class BirthdayPlugin(MaiBotPlugin):
 
         if not self._is_valid_birthday():
             self._log_invalid_birthday()
+        self._warn_impossible_date()
         self.ctx.logger.info(
             "生日插件已加载：生日=%d月%d日，启用=%s",
             self.config.birthday.month,
@@ -82,6 +84,7 @@ class BirthdayPlugin(MaiBotPlugin):
             return
         if not self._is_valid_birthday():
             self._log_invalid_birthday()
+        self._warn_impossible_date()
         self.ctx.logger.info(
             "生日配置已更新：生日=%d月%d日，启用=%s",
             self.config.birthday.month,
@@ -100,6 +103,28 @@ class BirthdayPlugin(MaiBotPlugin):
 
         self.ctx.logger.warning(
             "生日配置无效：month=%s day=%s（要求 month 为 1-12、day 为 1-31）",
+            self.config.birthday.month,
+            self.config.birthday.day,
+        )
+
+    def _has_impossible_date(self) -> bool:
+        """判断配置的日期在对应月份中是否存在（如 2 月 30 日、4 月 31 日不存在）。
+
+        月份天数按闰年 2000 年计算，因此 2 月 29 日不被判为不存在。
+        """
+
+        birthday = self.config.birthday
+        if not self._is_valid_birthday():
+            return False
+        return birthday.day > monthrange(2000, birthday.month)[1]
+
+    def _warn_impossible_date(self) -> None:
+        """对永远不会生效的日期给出 warning，由加载与配置更新入口调用。"""
+
+        if not self._has_impossible_date():
+            return
+        self.ctx.logger.warning(
+            "生日配置日期在对应月份中不存在：month=%s day=%s，该配置永远不会生效",
             self.config.birthday.month,
             self.config.birthday.day,
         )
